@@ -90,6 +90,6 @@ Word play(Game& game) {
 
     candidates.erase(filteredOut, candidates.end());
 
-    if (game.numGuessesMade() > 10) exit(0);
+    if (game.numGuessesMade() > 15) exit(0);
   }
 }
