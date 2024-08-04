@@ -24,9 +24,9 @@ Word compareWords(Word guess, Word secret) {
   return result;
 }
 
-Game::Game() : guessesMade(0), secretWord(randomChoice(knownWords)) {}
+Game::Game() : secretWord(randomChoice(knownWords)), guessesMade(0) {}
 
-Game::Game(Word secretWord) : guessesMade(0), secretWord(secretWord) {}
+Game::Game(Word secretWord) : secretWord(secretWord), guessesMade(0) {}
 
 Word Game::makeAGuess(Word guess) {
   guessesMade++;

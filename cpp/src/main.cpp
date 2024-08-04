@@ -31,8 +31,9 @@ void measure_strategy(int N) {
   std::cout
     << '\n'
     << "Played " << N << " Games" << '\n'
-    << "Average Num Guesses = " << mean << '\n'
-    << "Std.Dev Num Guesses = " << stdev << '\n'
+    << "Average  Num Guesses = " << mean << '\n'
+    << "Std.Dev. Num Guesses = " << stdev << '\n'
+    << '\n'
     << "Completed in " << elapsed.count() << " seconds" << '\n';
 }
 
