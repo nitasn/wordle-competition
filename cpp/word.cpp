@@ -1,14 +1,8 @@
 #include "word.h"
+#include <cassert>
 
 Word::Word(const std::string &str) : bits(0) {
   assert(str.size() == 5);
-  for (size_t i = 0; i < 5; ++i) {
-    this->bits |= static_cast<uint64_t>(str[i]) << (i * 8);
-  }
-}
-
-Word::Word(const char* str) : bits(0) {
-  assert(strlen(str) == 5);
   for (size_t i = 0; i < 5; ++i) {
     this->bits |= static_cast<uint64_t>(str[i]) << (i * 8);
   }
@@ -32,4 +26,13 @@ char& Word::operator[](int i) {
 
 bool Word::operator==(const Word word) const {
   return this->bits == word.bits;
+}
+
+int Word::indexOf(char ch) const {
+  for (int i = 0; i < 5; ++i) {
+    if (this->operator[](i) == ch) {
+      return i;
+    }
+  }
+  return -1;
 }

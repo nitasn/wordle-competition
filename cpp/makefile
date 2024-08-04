@@ -1,5 +1,5 @@
 all:
-	g++ -std=c++20 word.cpp known_words.cpp main.cpp
+	g++ -std=c++20 engine.cpp known_words.cpp main.cpp random.cpp strategy.cpp word.cpp
 
 run: all
 	./a.out

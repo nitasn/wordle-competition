@@ -4,7 +4,6 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <cassert>
 #include <sstream>
 
 std::string readFile(const std::string& filename) {
@@ -19,24 +18,14 @@ std::string readFile(const std::string& filename) {
   return content;
 }
 
-std::vector<std::string> splitByWhitespaces(const std::string& content) {
-  std::istringstream iss(content);
-  std::vector<std::string> words;
-  std::string word;
-
-  while (iss >> word) {
-    words.push_back(word);
-  }
-  return words;
-}
-
 std::vector<Word> readWordsFromFile(const std::string& filename) {
   std::string content = readFile(filename);
-  std::vector<std::string> strings = splitByWhitespaces(content);
-  
+  std::istringstream iss(content);
   std::vector<Word> words;
-  for (const std::string& str : strings) {
-    words.emplace_back(str);
+  
+  std::string word;
+  while (iss >> word) {
+    words.emplace_back(word);
   }
 
   return words;
