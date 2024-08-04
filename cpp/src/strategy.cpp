@@ -1,6 +1,6 @@
 #include "strategy.h"
 #include "random.h"
-// #include <algorithm>
+#include <algorithm>
 
 Word play(Game& game) {
   std::vector<Word> candidates = knownWords; 
@@ -13,20 +13,12 @@ Word play(Game& game) {
       return guess;
     }
 
-    std::vector<Word> filtered;
-    filtered.reserve(candidates.size());
-    for (Word word : candidates) {
-      if (compareWords(guess, word) == resultPattern) {
-        filtered.push_back(word);
-      }
-    }
-    candidates = filtered;
-
-    // auto removeCondition = std::remove_if(
-    //   candidates.begin(), 
-    //   candidates.end(),
-    //   [=](Word word) { return compareWords(guess, word) != resultPattern; }
-    // );
-    // candidates.erase(removeCondition, candidates.end());
+    auto filteredOut = std::remove_if(
+      candidates.begin(), 
+      candidates.end(),
+      [=](Word word) { return compareWords(guess, word) != resultPattern; }
+    );
+    
+    candidates.erase(filteredOut, candidates.end());
   }
 }
