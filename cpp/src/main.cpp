@@ -38,5 +38,5 @@ void measure_strategy(int N) {
 }
 
 int main() {
-  measure_strategy(5000);
+  measure_strategy(1);
 }

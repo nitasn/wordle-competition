@@ -36,3 +36,11 @@ int Word::indexOf(char ch) const {
   }
   return -1;
 }
+
+std::string Word::toString() const {
+  std::string result(5, '_');
+  for (int i = 0; i < 5; ++i) {
+    result[i] = this->operator[](i);
+  }
+  return result;
+}

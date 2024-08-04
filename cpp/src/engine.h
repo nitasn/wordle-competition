@@ -4,7 +4,7 @@
 #include "word.h"
 #include "known_words.h"
 
-enum : char {
+enum PatternResult : char {
   LETTER_NOT_IN_WORD = 0x0,          // ⬜
   CORRECT_LETTER_WRONG_INDEX = 0x1,  // 🟨
   CORRECT_LETTER_CORRECT_INDEX = 0x2 // 🟩

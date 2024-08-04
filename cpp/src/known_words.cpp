@@ -31,4 +31,4 @@ std::vector<Word> readWordsFromFile(const std::string& filename) {
   return words;
 }
 
-std::vector<Word> knownWords = readWordsFromFile("../known_words.txt");
+std::vector<Word> knownWords = readWordsFromFile("known_words.txt");

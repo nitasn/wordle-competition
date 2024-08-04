@@ -9,12 +9,15 @@ private:
   inline constexpr Word(uint64_t bits) : bits(bits) {}
 
 public:
+  inline Word() {}
   Word(const std::string &str);
   char operator[](int i) const;
   char& operator[](int i);
   bool operator==(const Word word) const;
   int indexOf(char ch) const;
-  
+
+  std::string toString() const;
+
   static constexpr Word filledWith(char letter) {
     uint64_t bits = 0;
     for (size_t i = 0; i < 5; ++i) {
