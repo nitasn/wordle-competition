@@ -44,3 +44,11 @@ std::string Word::toString() const {
   }
   return result;
 }
+
+const char* Word::toCString() const {
+  static std::string result(5, '_');
+  for (int i = 0; i < 5; ++i) {
+    result[i] = this->operator[](i);
+  }
+  return result.c_str();
+}

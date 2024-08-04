@@ -37,12 +37,20 @@ double entropy(int histogram[243], size_t numCandidates) {
 }
 
 Word bestCandidate(const std::vector<Word>& candidates) {
+  if (candidates.size() == knownWords.size()) {
+    return Word(std::string("tares"));
+  }
+
+  if (candidates.size() == 1) {
+    return candidates[0];
+  }
+
   int histogram[243];
 
   Word bestGuess;
   double bestScore = 0;
 
-  for (Word guess : candidates.size() > 10 ? knownWords: candidates) {
+  for (Word guess : candidates.size() > 5 ? knownWords: candidates) {
     resultsPatternHistogram(guess, candidates, histogram);
     double score = entropy(histogram, candidates.size());
 
@@ -64,15 +72,22 @@ const char* toUnicode(char ch) {
   }
 }
 
+std::string toUpperCase(const std::string& input) {
+  std::string result = input;
+  std::transform(result.begin(), result.end(), result.begin(),
+                 [](auto c) { return std::toupper(c); });
+  return result;
+}
+
 Word play(Game& game) {
   std::vector<Word> candidates = knownWords; 
+  std::cout << '\n';
 
   while (true) {
-    std::cout << "### FINDING BEST CANDIDATE ###" << '\n';
     Word guess = bestCandidate(candidates);
     Word resultPattern = game.makeAGuess(guess);
 
-    std::cout << "guessed " << guess.toString() << " and got ";
+    std::cout << "guessed " << toUpperCase(guess.toString()) << " and got ";
     for (int i = 0; i < 5; ++i) {
       std::cout << toUnicode(resultPattern[i]);
     }

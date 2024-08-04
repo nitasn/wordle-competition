@@ -9,7 +9,7 @@
 #include "engine.h"
 #include "strategy.h"
 
-void measure_strategy(int N) {
+void measureStrategy(int N) {
   std::vector<int> list_num_guesses;
   auto start = std::chrono::high_resolution_clock::now();
 
@@ -38,5 +38,5 @@ void measure_strategy(int N) {
 }
 
 int main() {
-  measure_strategy(1);
+  measureStrategy(1000);
 }

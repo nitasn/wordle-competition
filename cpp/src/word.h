@@ -17,6 +17,7 @@ public:
   int indexOf(char ch) const;
 
   std::string toString() const;
+  const char* toCString() const;
 
   static constexpr Word filledWith(char letter) {
     uint64_t bits = 0;
