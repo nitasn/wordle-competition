@@ -1,15 +1,28 @@
 ## `strategy.py`
-Your goal is to write a `play` function. It takes a game instance and returns the secret word.
+Your goal is to write a `play` function. It takes a `Game` instance and returns the secret word.
 
 ```py
 from engine import Game, KNOWN_WORDS, compare_words
-
+import random
 
 def play(game: Game) -> str:
   """
   Plays the game and finds the secret word.
   """
-  # Your code here
+  # Your code here...
+
+  # Example strategy:
+
+  candidates = KNOWN_WORDS
+  
+  while True:
+    guess = random.choice(candidates)
+    result_pattern = game.make_a_guess(guess)
+    
+    if result_pattern == "🟩🟩🟩🟩🟩":
+      return guess
+    
+    candidates = [word for word in candidates if compare_words(guess, word) == result_pattern]
 ```
 
 ## `engine.py`
@@ -31,10 +44,8 @@ def compare_words(guess: str, secret: str) -> str:
 
 
 KNOWN_WORDS = ["ahead", "hello", ...]  # 14855 words
-```
 
-There's also a simple Game class. It has a `make_a_guess` method.
-```py
+
 class Game:
   def __init__(self):
     self.__secret_word = random.choice(KNOWN_WORDS)
