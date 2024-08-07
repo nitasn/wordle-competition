@@ -38,5 +38,5 @@ void measureStrategy(int N) {
 }
 
 int main() {
-  measureStrategy(1000);
+  measureStrategy(100);
 }

@@ -1,10 +1,14 @@
 #include "word.h"
+#include "engine.h"
+
 #include <cassert>
+#include <sstream>
 
 Word::Word(const std::string &str) : bits(0) {
   assert(str.size() == 5);
   for (size_t i = 0; i < 5; ++i) {
-    this->bits |= static_cast<uint64_t>(str[i]) << (i * 8);
+    char ch = 'A' <= str[i] && str[i] <= 'Z' ? std::tolower(str[i]) : str[i];
+    this->bits |= static_cast<uint64_t>(ch) << (i * 8);
   }
 }
 
@@ -37,18 +41,23 @@ int Word::indexOf(char ch) const {
   return -1;
 }
 
-std::string Word::toString() const {
-  std::string result(5, '_');
-  for (int i = 0; i < 5; ++i) {
-    result[i] = this->operator[](i);
+static const char* toUnicode(char ch) {
+  switch (ch) {
+    case LETTER_NOT_IN_WORD: return "⬜";
+    case CORRECT_LETTER_WRONG_INDEX: return "🟨";
+    case CORRECT_LETTER_CORRECT_INDEX: return "🟩";
+    default: return "?";
   }
-  return result;
 }
 
-const char* Word::toCString() const {
-  static std::string result(5, '_');
+std::ostream& operator<<(std::ostream& out, Word word) {
   for (int i = 0; i < 5; ++i) {
-    result[i] = this->operator[](i);
+    char ch = word[i];
+    if ('a' <= ch && ch <= 'z') {
+      out << static_cast<char>(std::toupper(ch));
+    } else {
+      out << toUnicode(ch);
+    }
   }
-  return result.c_str();
+  return out;
 }

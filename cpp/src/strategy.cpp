@@ -36,9 +36,12 @@ double entropy(int histogram[243], size_t numCandidates) {
   return entropy;
 }
 
+// achieved by running `bestCandidate` with `candidates == knownWords`
+Word starterWord = std::string("tares");
+
 Word bestCandidate(const std::vector<Word>& candidates) {
   if (candidates.size() == knownWords.size()) {
-    return Word(std::string("tares"));
+    return starterWord;
   }
 
   if (candidates.size() == 1) {
@@ -63,22 +66,6 @@ Word bestCandidate(const std::vector<Word>& candidates) {
   return bestGuess;
 }
 
-const char* toUnicode(char ch) {
-  switch (ch) {
-    case LETTER_NOT_IN_WORD: return "⬜";
-    case CORRECT_LETTER_WRONG_INDEX: return "🟨";
-    case CORRECT_LETTER_CORRECT_INDEX: return "🟩";
-    default: return "?";
-  }
-}
-
-std::string toUpperCase(const std::string& input) {
-  std::string result = input;
-  std::transform(result.begin(), result.end(), result.begin(),
-                 [](auto c) { return std::toupper(c); });
-  return result;
-}
-
 Word play(Game& game) {
   std::vector<Word> candidates = knownWords; 
   std::cout << '\n';
@@ -87,11 +74,7 @@ Word play(Game& game) {
     Word guess = bestCandidate(candidates);
     Word resultPattern = game.makeAGuess(guess);
 
-    std::cout << "guessed " << toUpperCase(guess.toString()) << " and got ";
-    for (int i = 0; i < 5; ++i) {
-      std::cout << toUnicode(resultPattern[i]);
-    }
-    std::cout << '\n';
+    std::cout << "Guessed " << guess << " and got " << resultPattern << '\n';
 
     if (resultPattern == ALL_CORRECT) {
       return guess;
@@ -105,6 +88,9 @@ Word play(Game& game) {
 
     candidates.erase(filteredOut, candidates.end());
 
-    if (game.numGuessesMade() > 15) exit(0);
+    if (game.numGuessesMade() > 20) {
+      std::cerr << "Infinite loop detected, pausing" << std::endl;
+      exit(EXIT_FAILURE);
+    }
   }
 }
