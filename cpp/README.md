@@ -21,3 +21,18 @@ Guessed SUITE and got 🟩🟩🟩🟩🟩
 
 After getting 🟩⬜🟩🟩🟩 for SPITE, 
 wasn't there a better word to guess? something with the letters HKMU?
+
+If setting the secret to FIGHT and fixing the first guess to LIGHT, the game goes like:
+```
+Guessed LIGHT and got ⬜🟩🟩🟩🟩
+Guessed ABERS and got ⬜⬜⬜⬜⬜
+Guessed KNOWD and got ⬜⬜⬜⬜⬜
+Guessed FIGHT and got 🟩🟩🟩🟩🟩
+```
+
+If setting the secret to EIGHT and fixing the first guess to EIGHT, the game goes like:
+```
+Guessed LIGHT and got ⬜🟩🟩🟩🟩
+Guessed ABERS and got ⬜⬜🟨⬜⬜
+Guessed EIGHT and got 🟩🟩🟩🟩🟩
+```
